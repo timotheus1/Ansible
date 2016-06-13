@@ -1,0 +1,13 @@
+---
+- name: Setup SSH, SSH keys, and users
+  hosts: all
+  remote_user: root
+  
+  tasks:
+        - name: Setup Users and passwords
+
+        - name: Copy over sshd_config file
+
+        - name: Copy over ssh keys
+
+      
