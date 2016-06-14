@@ -1,10 +1,24 @@
 ---
-- name: Setup SSH, SSH keys, and users
+- name: Setup SSH, SSH keys, users, and install packages
   hosts: all
   remote_user: root
   
+  vars:
+	password: password
+  
+
   tasks:
+	- name: Install programs
+	yum: name=zsh state=latest update_cache=yes
+	yum: name=vim state=latest update_cache=yes
+
         - name: Setup Users and passwords
+	  user: >
+		name=username
+		shell=/bin/zsh
+		group=wheel
+		append=yes
+		password={{password}}
 
         - name: Copy over sshd_config file
 
