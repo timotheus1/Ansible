@@ -9,7 +9,6 @@
 
   tasks:
 	- name: Install programs
-	yum: name=zsh state=latest update_cache=yes
 	yum: name=vim state=latest update_cache=yes
 
         - name: Setup Users and passwords
