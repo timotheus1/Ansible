@@ -1,26 +1,35 @@
 ---
-- name: Setup SSH, SSH keys, users, and install packages
-  hosts: all
+- name: Setup new server
+  hosts: webservers
   remote_user: root
-  
+
   vars:
-	password: password
-  
+ 	  password: password
 
-  tasks:
-	- name: Install programs
-	yum: name=vim state=latest update_cache=yes
+ tasks:
 
-        - name: Setup Users and passwords
-	  user: >
-		name=username
-		shell=/bin/zsh
-		group=wheel
-		append=yes
-		password={{password}}
+ - name: Upgrade All Packages
+ 	  yum: name=* state=latest update_cahce=yes
 
-        - name: Copy over sshd_config file
+ - name: Install Packages
+ 	  yum: >
+ 	  	state=latest
+ 	  	name={{ item }}
+ 	  	with_items:
+ 	  		- vim
+ 	  		- git
+ 	  		- tcpdump
 
-        - name: Copy over ssh keys
+- name: Create default user blah
+ 	  user: >
+ 	  	name=blah
+ 	  	password={{password}}
+ 	  	group=wheel
 
-      
+- name: Copy SSH keys over
+    Copy: >
+      src=~/.ssh/dev
+      dest=/home/butter/.ssh/dev
+   		owner=blah
+   		group=blah
+   		mode=0600
