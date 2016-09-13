@@ -29,7 +29,7 @@
 - name: Copy SSH keys over
     Copy: >
       src=~/.ssh/dev
-      dest=/home/butter/.ssh/dev
+      dest=/home/blah/.ssh/dev
    		owner=blah
    		group=blah
    		mode=0600
